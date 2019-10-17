@@ -108,7 +108,8 @@ public class ClassLoaderCompiler {
                     // in various different ways in this very own ClassLoaderCompiler class, so
                     // not passing this jar to the JDK's compiler won't prevent its Class-Path
                     // references from being part of the hot deployment compile classpath.
-                    if (devModeRunnerJarCanonicalPath != null && file.getCanonicalPath().equals(devModeRunnerJarCanonicalPath)) {
+                    if (devModeRunnerJarCanonicalPath != null
+                            && file.getCanonicalPath().equals(devModeRunnerJarCanonicalPath)) {
                         log.debug("Dev mode runner jar " + file + " won't be added to compilation classpath of hot deployment");
                     } else {
                         classPathElements.add(file);
