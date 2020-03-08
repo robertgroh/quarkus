@@ -28,6 +28,7 @@ public class KubernetesClientTest {
 
     @Test
     public void before() {
+        printSys();
         Pod pod1 = new PodBuilder().withNewMetadata().withName("pod1").withNamespace("test").and().build();
         Pod pod2 = new PodBuilder().withNewMetadata().withName("pod2").withNamespace("test").and().build();
 
@@ -68,6 +69,23 @@ public class KubernetesClientTest {
 
         RestAssured.when().post("/pod/test").then()
                 .body(containsString("12345"));
+    }
+
+    private static void printSys() {
+        System.out.println("*** Hello World from Kubernetes Client!!! ***");
+        System.out.println("Listing System Properties");
+        for (final String name : System.getProperties().stringPropertyNames()) {
+            System.out.println(name + "=" + System.getProperty(name));
+        }
+        System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
+
+
+        logger.info("*** Hello World from Kubernetes Client!!! ***");
+        logger.info("Listing System Properties");
+        for (final String name : System.getProperties().stringPropertyNames()) {
+            logger.info(name + "=" + System.getProperty(name));
+        }
+        logger.info("Num available processors " + Runtime.getRuntime().availableProcessors());
     }
 
 }
