@@ -76,8 +76,6 @@ jobs:
         with:
           name: maven-repo
           path: maven-repo.tgz
-
-       
   native-tests:
     name: Native Tests - ${{matrix.category}}
     needs: build-jdk11
