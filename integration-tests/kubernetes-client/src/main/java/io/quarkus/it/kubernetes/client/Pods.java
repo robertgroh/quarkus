@@ -19,6 +19,16 @@ import io.fabric8.kubernetes.client.KubernetesClient;
 @Path("/pod")
 public class Pods {
 
+    static {
+        System.out.println("*** Hello World from Kubernetes Client!!! ***");
+        System.out.println("Listing System Properties");
+        for (final String name : System.getProperties().stringPropertyNames()) {
+            System.out.println(name + "=" + System.getProperty(name));
+        }
+        System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
+
+    }
+
     private final KubernetesClient kubernetesClient;
 
     public Pods(KubernetesClient kubernetesClient) {
