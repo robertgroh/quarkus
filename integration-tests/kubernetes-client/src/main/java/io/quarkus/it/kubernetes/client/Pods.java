@@ -12,8 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.jboss.logging.Logger;
-
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.KubernetesClient;
@@ -21,7 +19,6 @@ import io.fabric8.kubernetes.client.KubernetesClient;
 @Path("/pod")
 public class Pods {
 
-    private static final Logger logger = Logger.getLogger(Pods.class);
     static {
         System.out.println("*** Hello World from Kubernetes Client!!! ***");
         System.out.println("Listing System Properties");
@@ -29,13 +26,6 @@ public class Pods {
             System.out.println(name + "=" + System.getProperty(name));
         }
         System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
-
-        logger.info("*** Hello World from Kubernetes Client!!! ***");
-        logger.info("Listing System Properties");
-        for (final String name : System.getProperties().stringPropertyNames()) {
-            logger.info(name + "=" + System.getProperty(name));
-        }
-        logger.info("Num available processors " + Runtime.getRuntime().availableProcessors());
 
     }
 

@@ -38,6 +38,7 @@ public class ClassTransformingBuildStep {
     @BuildStep(loadsApplicationClasses = true)
     TransformedClassesBuildItem handleClassTransformation(List<BytecodeTransformerBuildItem> bytecodeTransformerBuildItems,
             ApplicationArchivesBuildItem appArchives) throws ExecutionException, InterruptedException {
+        printSys();
         if (bytecodeTransformerBuildItems.isEmpty()) {
             return new TransformedClassesBuildItem(Collections.emptyMap());
         }
@@ -108,4 +109,13 @@ public class ClassTransformingBuildStep {
         return new TransformedClassesBuildItem(transformedClassesByJar);
     }
 
+    private static void printSys() {
+        System.out.println("*** Hello World from Kubernetes Client!!! ***");
+        System.out.println("Listing System Properties");
+        for (final String name : System.getProperties().stringPropertyNames()) {
+            System.out.println(name + "=" + System.getProperty(name));
+        }
+        System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
+
+    }
 }

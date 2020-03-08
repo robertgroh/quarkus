@@ -94,7 +94,6 @@ public class Timing {
     }
 
     private static void printSys() {
-        final Logger logger = Logger.getLogger("io.quarkus");
 
         System.out.println("*** Hello World from Kubernetes Client!!! ***");
         System.out.println("Listing System Properties");
@@ -103,12 +102,6 @@ public class Timing {
         }
         System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
 
-        logger.info("*** Hello World from Kubernetes Client!!! ***");
-        logger.info("Listing System Properties");
-        for (final String name : System.getProperties().stringPropertyNames()) {
-            logger.info(name + "=" + System.getProperty(name));
-        }
-        logger.info("Num available processors " + Runtime.getRuntime().availableProcessors());
     }
 
     public static void printStopTime(String name) {

@@ -53,6 +53,9 @@ jobs:
       - name: Build Quarkus
         run: mvn -B install -DskipTests -DskipITs -Dno-format -DskipDocs
 
+      - name: Test core
+        run: mvn -B install -f core/pom.xml
+
       - name: Run integration tests in native
         run: mvn -B --settings azure-mvn-settings.xml verify -f integration-tests/kubernetes-client/pom.xml -Dno-format -Ddocker -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:19.3.1-java${{ matrix.java }} -Dtest-postgresql -Dtest-elasticsearch -Dtest-mysql -Dtest-dynamodb -Dtest-vault -Dtest-neo4j -Dtest-keycloak -Dtest-mssql -Dtest-mariadb -Dmariadb.url="jdbc:mariadb://localhost:3308/hibernate_orm_test"
 
