@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    if: github.repository == 'quarkusio/quarkus'
+    if: github.repository == 'jaikiran/quarkus'
     runs-on: ubuntu-18.04
     strategy:
       matrix:
