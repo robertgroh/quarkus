@@ -12,10 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.KubernetesClient;
-import org.jboss.logging.Logger;
 
 @Path("/pod")
 public class Pods {
@@ -28,7 +29,6 @@ public class Pods {
             System.out.println(name + "=" + System.getProperty(name));
         }
         System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
-
 
         logger.info("*** Hello World from Kubernetes Client!!! ***");
         logger.info("Listing System Properties");
@@ -49,14 +49,12 @@ public class Pods {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{namespace}")
     public List<Pod> pods(@PathParam("namespace") String namespace) {
-        printSys();
         return kubernetesClient.pods().inNamespace(namespace).list().getItems();
     }
 
     @DELETE
     @Path("/{namespace}")
     public Response deleteFirst(@PathParam("namespace") String namespace) {
-        printSys();
 
         final List<Pod> pods = kubernetesClient.pods().inNamespace(namespace).list().getItems();
         if (pods.isEmpty()) {
@@ -71,7 +69,6 @@ public class Pods {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{namespace}")
     public Response updateFirst(@PathParam("namespace") String namespace) {
-        printSys();
 
         final List<Pod> pods = kubernetesClient.pods().inNamespace(namespace).list().getItems();
         if (pods.isEmpty()) {
@@ -92,26 +89,9 @@ public class Pods {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{namespace}")
     public Pod createNew(@PathParam("namespace") String namespace) {
-        printSys();
 
         return kubernetesClient.pods().inNamespace(namespace).createNew().withNewMetadata().withResourceVersion("12345")
                 .endMetadata().done();
     }
 
-    private static void printSys() {
-        System.out.println("*** Hello World from Kubernetes Client!!! ***");
-        System.out.println("Listing System Properties");
-        for (final String name : System.getProperties().stringPropertyNames()) {
-            System.out.println(name + "=" + System.getProperty(name));
-        }
-        System.out.println("Num available processors " + Runtime.getRuntime().availableProcessors());
-
-
-        logger.info("*** Hello World from Kubernetes Client!!! ***");
-        logger.info("Listing System Properties");
-        for (final String name : System.getProperties().stringPropertyNames()) {
-            logger.info(name + "=" + System.getProperty(name));
-        }
-        logger.info("Num available processors " + Runtime.getRuntime().availableProcessors());
-    }
 }
