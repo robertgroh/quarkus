@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'qk-8212'
-    branches-ignore:
-      - 'dependabot/**'
     paths-ignore:
       - 'docs/src/main/asciidoc/**'
       - 'README.md'
